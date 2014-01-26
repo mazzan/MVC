@@ -6,7 +6,7 @@
 /**
  * Add static entries in the template file. 
  */
-$ra->data['header'] = '<h1>Header: Rama</h1>';
+$ra->data['header'] = '<h1>Rama</h1>';
 $ra->data['footer'] = <<<EOD
 <p>Footer: &copy; Rama by Mats Sandén (mazzan@masoft.se)</p>
 

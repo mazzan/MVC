@@ -7,8 +7,21 @@
 */
 html{}
 body{
-   background-color:#eee;
+   background-color:#333;
    font: 1em Verdana, Arial, Helvetica, sans-serif;
+}
+
+h1 {
+  border-bottom: 1px solid #ccc;
+  text-transform: uppercase;
+  padding: 10px;
+  color: #333;
+}
+
+h2 {
+  text-transform: uppercase;
+  padding: 10px;
+  color: #333;
 }
 
 #header,
@@ -16,7 +29,9 @@ body{
 #footer {
    margin:0 auto;
    width:970px;
-   background-color:#fff;
+   background-color:#eee;
    padding: 1em;
 }
+
+
 
