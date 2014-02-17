@@ -5,7 +5,7 @@
 define('RAMA_INSTALL_PATH', dirname(__FILE__));
 define('RAMA_SITE_PATH', RAMA_INSTALL_PATH . '/site');
 
-require(RAMA_INSTALL_PATH.'/src/CRama/bootstrap.php');
+require(RAMA_INSTALL_PATH.'/src/bootstrap.php');
 
 $ra = CRama::Instance();
 

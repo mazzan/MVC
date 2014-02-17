@@ -6,7 +6,12 @@
 /**
  * Add static entries in the template file. 
  */
-$ra->data['header'] = '<h1>Rama</h1>';
+$ra->data['header'] = 'Rama';
+$ra->data['slogan'] = 'A PHP-based MVC-inspired CMF';
+$ra->data['favicon'] = theme_url('logo_80x80.png');
+$ra->data['logo'] = theme_url('logo_80x80.png');
+$ra->data['logo_width'] = 80;
+$ra->data['logo_height'] = 80;
 $ra->data['footer'] = <<<EOD
 <p>Footer: &copy; Rama by Mats Sandén (mazzan@masoft.se)</p>
 

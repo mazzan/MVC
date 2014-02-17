@@ -2,7 +2,7 @@ Options -MultiViews
 <IfModule mod_rewrite.c>
   RewriteEngine on
   # Must use RewriteBase on www.student.bth.se, Rewritebase for url /~mos/test is /~mos/test/
-  #RewriteBase /~masb13/phpmvc/MVC/
+  RewriteBase /~masb13/phpmvc/MVC/
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteRule (.*) index.php/$1 [NC,L]

@@ -3,12 +3,29 @@
  * Site configuration, this file is changed by user per site.
  *
  */
+ 
+/**
+* Set database(s).
+*/
+$ra->config['database'][0]['dsn'] = 'sqlite:' . RAMA_SITE_PATH . '/data/.ht.sqlite';
 
 /**
  * Set level of error reporting
  */
 error_reporting(-1);
 ini_set('display_errors', 1);
+
+
+/**
+* Set what to show as debug or developer information in the get_debug() theme helper.
+*/
+$ra->config['debug']['rama'] = false;
+$ra->config['debug']['session'] = false;
+$ra->config['debug']['timer'] = true;
+$ra->config['debug']['db-num-queries'] = true;
+$ra->config['debug']['db-queries'] = true;
+
+
 
 /**
  * What type of urls should be used?
@@ -28,6 +45,7 @@ $ra->config['base_url'] = null;
  * Define session name
  */
 $ra->config['session_name'] = preg_replace('/[:\.\/-_]/', '', $_SERVER["SERVER_NAME"]);
+$ra->config['session_key']  = 'rama';
 
 /**
  * Define server timezone
@@ -57,6 +75,7 @@ $ra->config['language'] = 'en';
 $ra->config['controllers'] = array(
   'index'     => array('enabled' => true,'class' => 'CCIndex'),
   'developer' => array('enabled' => true,'class' => 'CCDeveloper'),
+  'guestbook' => array('enabled' => true,'class' => 'CCGuestbook'),
 );
 
 /**
