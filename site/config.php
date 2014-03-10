@@ -26,6 +26,11 @@ $ra->config['debug']['db-num-queries'] = true;
 $ra->config['debug']['db-queries'] = true;
 
 
+/**
+* Allow or disallow creation of new user accounts.
+*/
+$ra->config['create_new_users'] = true;
+
 
 /**
  * What type of urls should be used?
@@ -44,8 +49,13 @@ $ra->config['base_url'] = null;
 /**
  * Define session name
  */
-$ra->config['session_name'] = preg_replace('/[:\.\/-_]/', '', $_SERVER["SERVER_NAME"]);
+$ra->config['session_name'] = preg_replace('/[:\.\/-_]/', '', __DIR__);
 $ra->config['session_key']  = 'rama';
+
+/**
+* How to hash password of new users, choose from: plain, md5salt, md5, sha1salt, sha1.
+*/
+$ra->config['hashing_algorithm'] = 'sha1salt';
 
 /**
  * Define server timezone
@@ -76,6 +86,8 @@ $ra->config['controllers'] = array(
   'index'     => array('enabled' => true,'class' => 'CCIndex'),
   'developer' => array('enabled' => true,'class' => 'CCDeveloper'),
   'guestbook' => array('enabled' => true,'class' => 'CCGuestbook'),
+  'user'      => array('enabled' => true,'class' => 'CCUser'),
+  'acp'       => array('enabled' => true,'class' => 'CCAdminControlPanel'),
 );
 
 /**
@@ -85,4 +97,3 @@ $ra->config['theme'] = array(
   // The name of the theme in the theme directory
   'name'    => 'core', 
 );
-

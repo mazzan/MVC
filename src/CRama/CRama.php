@@ -17,6 +17,7 @@ public $db;
 public $views;
 public $session;
 public $timer = array();
+public $user;
 
 
 /**
@@ -41,11 +42,15 @@ date_default_timezone_set($this->config['timezone']);
 
 // Create a database object.
 if(isset($this->config['database'][0]['dsn'])) {
-   $this->db = new CMDatabase($this->config['database'][0]['dsn']);
+   $this->db = new CDatabase($this->config['database'][0]['dsn']);
    }
   
    // Create a container for all views and theme data
    $this->views = new CViewContainer();
+   
+    // Create a object for the user
+    $this->user = new CMUser($this);
+   
   }
   
   
