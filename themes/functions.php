@@ -1,16 +1,16 @@
 <?php
 /**
-* Helpers for theming, available for all themes in their template files and functions.php.
-* This file is included right before the themes own functions.php
-*/
+ * Helpers for theming, available for all themes in their template files and functions.php.
+ * This file is included right before the themes own functions.php
+ */
  
 
 /**
-* Print debuginformation from the framework.
-*/
+ * Print debuginformation from the framework.
+ */
 function get_debug() {
   // Only if debug is wanted.
-  $ra = CRama::Instance();
+  $ra = CRama::Instance();  
   if(empty($ra->config['debug'])) {
     return;
   }
@@ -21,7 +21,7 @@ function get_debug() {
     $flash = $ra->session->GetFlash('database_numQueries');
     $flash = $flash ? "$flash + " : null;
     $html .= "<p>Database made $flash" . $ra->db->GetNumQueries() . " queries.</p>";
-  }
+  }    
   if(isset($ra->config['debug']['db-queries']) && $ra->config['debug']['db-queries'] && isset($ra->db)) {
     $flash = $ra->session->GetFlash('database_queries');
     $queries = $ra->db->GetQueries();
@@ -29,24 +29,24 @@ function get_debug() {
       $queries = array_merge($flash, $queries);
     }
     $html .= "<p>Database made the following queries.</p><pre>" . implode('<br/><br/>', $queries) . "</pre>";
-  }
+  }    
   if(isset($ra->config['debug']['timer']) && $ra->config['debug']['timer']) {
     $html .= "<p>Page was loaded in " . round(microtime(true) - $ra->timer['first'], 5)*1000 . " msecs.</p>";
-  }
+  }    
   if(isset($ra->config['debug']['rama']) && $ra->config['debug']['rama']) {
     $html .= "<hr><h3>Debuginformation</h3><p>The content of CRama:</p><pre>" . htmlent(print_r($ra, true)) . "</pre>";
-  }
+  }    
   if(isset($ra->config['debug']['session']) && $ra->config['debug']['session']) {
     $html .= "<hr><h3>SESSION</h3><p>The content of CRama->session:</p><pre>" . htmlent(print_r($ra->session, true)) . "</pre>";
     $html .= "<p>The content of \$_SESSION:</p><pre>" . htmlent(print_r($_SESSION, true)) . "</pre>";
-  }
+  }    
   return $html;
 }
 
 
 /**
-* Get messages stored in flash-session.
-*/
+ * Get messages stored in flash-session.
+ */
 function get_messages_from_session() {
   $messages = CRama::Instance()->session->GetMessages();
   $html = null;
@@ -61,61 +61,89 @@ function get_messages_from_session() {
 }
 
 
- /**
+/**
  * Login menu. Creates a menu which reflects if user is logged in or not.
  */
 function login_menu() {
   $ra = CRama::Instance();
-
   if($ra->user['isAuthenticated']) {
-  	  
-  	  $items = "<a href='" . create_url('user/profile') . "'><img class='gravatar' src='" . get_gravatar(20) . "' alt=''> " . $ra->user['acronym'] . "</a> ";
-  	  
-  	  if($ra->user['hasRoleAdministrator']) {
-  	  	  $items .= "<a href='" . create_url('acp') . "'>acp</a> ";
-  	  }
-  	  $items .= "<a href='" . create_url('user/logout') . "'>logout</a> ";
+    $items = "<a href='" . create_url('user/profile') . "'><img class='gravatar' src='" . get_gravatar(20) . "' alt=''> " . $ra->user['acronym'] . "</a> ";
+    if($ra->user['hasRoleAdministrator']) {
+      $items .= "<a href='" . create_url('acp') . "'>acp</a> ";
+    }
+    $items .= "<a href='" . create_url('user/logout') . "'>logout</a> ";
   } else {
     $items = "<a href='" . create_url('user/login') . "'>login</a> ";
   }
-  
-  
   return "<nav id='login-menu'>$items</nav>";
-
 }
 
-/**
-* Get a gravatar based on the user's email.
-*/
 
+/**
+ * Get a gravatar based on the user's email.
+ */
 function get_gravatar($size=null) {
-	return 'http://www.gravatar.com/avatar/' . md5(strtolower(trim(CRama::Instance()->user['email']))) . '.jpg?r=pg&amp;d=wavatar&amp;' . ($size ? "s=$size" : null);
+  return 'http://www.gravatar.com/avatar/' . md5(strtolower(trim(CRama::Instance()->user['email']))) . '.jpg?r=pg&amp;d=wavatar&amp;' . ($size ? "s=$size" : null);
 }
 
 
 /**
-* Prepend the base_url.
-*/
+ * Escape data to make it safe to write in the browser.
+ *
+ * @param $str string to escape.
+ * @returns string the escaped string.
+ */
+function esc($str) {
+  return htmlEnt($str);
+}
+
+
+/**
+ * Filter data according to a filter. Uses CMContent::Filter()
+ *
+ * @param $data string the data-string to filter.
+ * @param $filter string the filter to use.
+ * @returns string the filtered string.
+ */
+function filter_data($data, $filter) {
+  return CMContent::Filter($data, $filter);
+}
+
+
+/**
+ * Display diff of time between now and a datetime. 
+ *
+ * @param $start datetime|string
+ * @returns string
+ */
+function time_diff($start) {
+  return formatDateTimeDiff($start);
+}
+
+
+/**
+ * Prepend the base_url.
+ */
 function base_url($url=null) {
   return CRama::Instance()->request->base_url . trim($url, '/');
 }
 
 
 /**
-* Create a url to an internal resource.
-*
-* @param string the whole url or the controller. Leave empty for current controller.
-* @param string the method when specifying controller as first argument, else leave empty.
-* @param string the extra arguments to the method, leave empty if not using method.
-*/
+ * Create a url to an internal resource.
+ *
+ * @param string the whole url or the controller. Leave empty for current controller.
+ * @param string the method when specifying controller as first argument, else leave empty.
+ * @param string the extra arguments to the method, leave empty if not using method.
+ */
 function create_url($urlOrController=null, $method=null, $arguments=null) {
   return CRama::Instance()->request->CreateUrl($urlOrController, $method, $arguments);
 }
 
 
 /**
-* Prepend the theme_url, which is the url to the current theme directory.
-*/
+ * Prepend the theme_url, which is the url to the current theme directory.
+ */
 function theme_url($url) {
   $ra = CRama::Instance();
   return "{$ra->request->base_url}themes/{$ra->config['theme']['name']}/{$url}";
@@ -123,17 +151,16 @@ function theme_url($url) {
 
 
 /**
-* Return the current url.
-*/
+ * Return the current url.
+ */
 function current_url() {
   return CRama::Instance()->request->current_url;
 }
 
 
 /**
-* Render all views.
-*/
+ * Render all views.
+ */
 function render_views() {
   return CRama::Instance()->views->Render();
 }
-

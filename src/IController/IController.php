@@ -1,9 +1,9 @@
 <?php
 /**
-* Interface for classes implementing a controller.
-*
-* @package RamaCore
-*/
+ * Interface for classes implementing a controller.
+ *
+ * @package RamaCore
+ */
 interface IController {
-  public function Index();
+	public function Index();
 }

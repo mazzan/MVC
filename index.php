@@ -1,4 +1,12 @@
 <?php
+/**
+ * All requests routed through here. This is an overview of what actaully happens during
+ * a request.
+ *
+ * @package RamaCore
+ */
+
+// ---------------------------------------------------------------------------------------
 //
 // PHASE: BOOTSTRAP
 //
@@ -10,12 +18,14 @@ require(RAMA_INSTALL_PATH.'/src/bootstrap.php');
 $ra = CRama::Instance();
 
 
+// ---------------------------------------------------------------------------------------
 //
 // PHASE: FRONTCONTROLLER ROUTE
 //
 $ra->FrontControllerRoute();
 
 
+// ---------------------------------------------------------------------------------------
 //
 // PHASE: THEME ENGINE RENDER
 //

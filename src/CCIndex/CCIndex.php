@@ -1,32 +1,32 @@
 <?php
 /**
-* Standard controller layout.
-*
-* @package RamaCore
-*/
+ * Standard controller layout.
+ * 
+ * @package RamaCore
+ */
 class CCIndex extends CObject implements IController {
 
   /**
-* Constructor
-*/
+   * Constructor
+   */
   public function __construct() {
     parent::__construct();
   }
   
 
-/**
+  /**
    * Implementing interface IController. All controllers must have an index action.
    */
-  public function Index() {         
+  public function Index() {			
     $this->views->SetTitle('Index Controller');
     $this->views->AddInclude(__DIR__ . '/index.tpl.php', array('menu'=>$this->Menu()));
   }
 
 
- /**
+  /**
    * A menu that shows all available controllers/methods
    */
-  private function Menu() {   
+  private function Menu() {	
     $items = array();
     foreach($this->config['controllers'] as $key => $val) {
       if($val['enabled']) {
@@ -42,5 +42,5 @@ class CCIndex extends CObject implements IController {
     }
     return $items;
   }
-}
   
+} 

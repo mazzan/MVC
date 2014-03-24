@@ -3,11 +3,6 @@
  * Site configuration, this file is changed by user per site.
  *
  */
- 
-/**
-* Set database(s).
-*/
-$ra->config['database'][0]['dsn'] = 'sqlite:' . RAMA_SITE_PATH . '/data/.ht.sqlite';
 
 /**
  * Set level of error reporting
@@ -17,8 +12,8 @@ ini_set('display_errors', 1);
 
 
 /**
-* Set what to show as debug or developer information in the get_debug() theme helper.
-*/
+ * Set what to show as debug or developer information in the get_debug() theme helper.
+ */
 $ra->config['debug']['rama'] = false;
 $ra->config['debug']['session'] = false;
 $ra->config['debug']['timer'] = true;
@@ -27,9 +22,9 @@ $ra->config['debug']['db-queries'] = true;
 
 
 /**
-* Allow or disallow creation of new user accounts.
-*/
-$ra->config['create_new_users'] = true;
+ * Set database(s).
+ */
+$ra->config['database'][0]['dsn'] = 'sqlite:' . RAMA_SITE_PATH . '/data/.ht.sqlite';
 
 
 /**
@@ -41,10 +36,24 @@ $ra->config['create_new_users'] = true;
  */
 $ra->config['url_type'] = 1;
 
+
 /**
  * Set a base_url to use another than the default calculated
  */
 $ra->config['base_url'] = null;
+
+
+/**
+ * How to hash password of new users, choose from: plain, md5salt, md5, sha1salt, sha1.
+ */
+$ra->config['hashing_algorithm'] = 'sha1salt';
+
+
+/**
+ * Allow or disallow creation of new user accounts.
+ */
+$ra->config['create_new_users'] = true;
+
 
 /**
  * Define session name
@@ -52,20 +61,18 @@ $ra->config['base_url'] = null;
 $ra->config['session_name'] = preg_replace('/[:\.\/-_]/', '', __DIR__);
 $ra->config['session_key']  = 'rama';
 
-/**
-* How to hash password of new users, choose from: plain, md5salt, md5, sha1salt, sha1.
-*/
-$ra->config['hashing_algorithm'] = 'sha1salt';
 
 /**
- * Define server timezone
+ * Define default server timezone when displaying date and times to the user. All internals are still UTC.
  */
 $ra->config['timezone'] = 'Europe/Stockholm';
+
 
 /**
  * Define internal character encoding
  */
 $ra->config['character_encoding'] = 'UTF-8';
+
 
 /**
  * Define language
@@ -86,6 +93,9 @@ $ra->config['controllers'] = array(
   'index'     => array('enabled' => true,'class' => 'CCIndex'),
   'developer' => array('enabled' => true,'class' => 'CCDeveloper'),
   'guestbook' => array('enabled' => true,'class' => 'CCGuestbook'),
+  'content'   => array('enabled' => true,'class' => 'CCContent'),
+  'blog'      => array('enabled' => true,'class' => 'CCBlog'),
+  'page'      => array('enabled' => true,'class' => 'CCPage'),
   'user'      => array('enabled' => true,'class' => 'CCUser'),
   'acp'       => array('enabled' => true,'class' => 'CCAdminControlPanel'),
 );
