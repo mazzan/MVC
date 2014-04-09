@@ -6,14 +6,14 @@
 /**
  * Add static entries for use in the template file. 
  */
-$ra->data['header'] = 'Rama';                                                                
+$ra->data['header'] = 'Rama';
 $ra->data['slogan'] = 'A PHP-based MVC-inspired CMF';
 $ra->data['favicon']      = theme_url('logo_80x80.png');
 $ra->data['logo']         = theme_url('logo_80x80.png');
 $ra->data['logo_width']   = 80;
 $ra->data['logo_height']  = 80;
 $ra->data['footer'] = <<<EOD
-<p>Rama &copy; by Mats SandÃ©n (mazzan@masoft.se)</p>
+<p>Rama &copy; by Mats Sandén (mazzan@masoft.se) | Based on CLydia by Mikael Roos (mos@dbwebb.se)</p>
 
 <p>Tools: 
 <a href="http://validator.w3.org/check/referer">html5</a>
