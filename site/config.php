@@ -131,6 +131,7 @@ $ra->config['menus'] = array(
     'home'      => array('label'=>'About Me', 'url'=>'my'),
     'blog'      => array('label'=>'My Blog', 'url'=>'my/blog'),
     'guestbook' => array('label'=>'Guestbook', 'url'=>'my/guestbook'),
+    'content'   => array('label'=>'Content', 'url'=>'content'),
   ),
 );
 

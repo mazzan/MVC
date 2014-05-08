@@ -21,6 +21,8 @@ class CCContent extends CObject implements IController {
     $this->views->SetTitle('Content Controller')
                 ->AddInclude(__DIR__ . '/index.tpl.php', array(
                   'contents' => $content->ListAll(),
+                   'is_authenticated'=>$this->user['isAuthenticated'],
+                   'user'=>$this->user,
                 ));
   }
   
