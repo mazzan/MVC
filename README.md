@@ -50,8 +50,8 @@ An alternative way of installing the framework is to download all the files in a
 * A common guestbook
 * A common blog
 * An administrator user account with UserID: root and Password: root
-* * An basic user account with UserID: doe and Password: doe
----
+* A basic user account with UserID: doe and Password: doe
+___
 
 ##Site management
 The look and feel of the page can be modified by altering some file variables or by editing the site CSS settings. It is also possible, as a logged in user, to create or edit the site content. 
@@ -141,4 +141,6 @@ After:
     ),
     
 6. The new link is now available in the navigation bar in the page header.
+
+___
 
