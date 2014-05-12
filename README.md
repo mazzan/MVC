@@ -50,7 +50,8 @@ An alternative way of installing the framework is to download all the files in a
 * A common guestbook
 * A common blog
 * An administrator user account with UserID: root and Password: root
-* A basic user account with UserID: doe and Password: doe
+* A basic user account with UserID: doe and Password: doe.  
+
 ___   
 
 ##Site management
@@ -143,4 +144,3 @@ After:
 6. The new link is now available in the navigation bar in the page header.
 
 ___   
-
