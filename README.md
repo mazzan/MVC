@@ -1,15 +1,15 @@
 #Rama, a PHP-based, MVC-inspired CMF
----  
+___   
  
 ##Introduction
 The Rama framework is created by Mats Sandén during the course "Database driven web applications with PHP and MVC" at BTH (Blekinge Institute of Technology). The finalized
 framework was the main goal of the course and was built from scratch.
-___
+___   
 
 ##License
 Rama is based on the PHP-based, MVC-inspired CMF LYDIA written by Mikael Roos. The framework is licensed according to MIT-license. See license.txt
 for details. The Rama framework uses external modules which are subject for own licensing rules.
-___
+___   
 
 
 ##Installation
@@ -51,7 +51,7 @@ An alternative way of installing the framework is to download all the files in a
 * A common blog
 * An administrator user account with UserID: root and Password: root
 * A basic user account with UserID: doe and Password: doe
-___
+___   
 
 ##Site management
 The look and feel of the page can be modified by altering some file variables or by editing the site CSS settings. It is also possible, as a logged in user, to create or edit the site content. 
@@ -142,5 +142,5 @@ After:
     
 6. The new link is now available in the navigation bar in the page header.
 
-___
+___   
 
