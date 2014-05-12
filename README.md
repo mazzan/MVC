@@ -1,246 +1,144 @@
-Lydia, a PHP-based, MVC-inspired CMF
-====================================
+#Rama, a PHP-based, MVC-inspired CMF
+---  
+ 
+##Introduction
+The Rama framework is created by Mats Sandén during the course "Database driven web applications with PHP and MVC" at BTH (Blekinge Institute of Technology). The finalized
+framework was the main goal of the course and was built from scratch.
+___
+
+##License
+Rama is based on the PHP-based, MVC-inspired CMF LYDIA written by Mikael Roos. The framework is licensed according to MIT-license. See license.txt
+for details. The Rama framework uses external modules which are subject for own licensing rules.
+___
+
+
+##Installation
+The Rama framework is stored on the software revision control system GITHub. It can be installed in two ways. Either it's cloned from the GIT repository directly to the server of choice or it's downloaded as a Zip-file and extracted/ copied to the server. Both ways are explained in detail under the step-by-step instructions below.
+
+###Requirements
+The frameworks requires the following to be supported/configured on the server :
+1. PHP
+2. SQLite
+3. The folder `site/data/` to have write permissions (chmod 777)
+
+
+###Step by step instructions
+Below follows detailed instructions how to install and configure the Rama framework.
+####Cloning the framework
+The framework can be cloned to a PC client or to a web servers with Git support.
+1. Clone the framework to a directory of your choice using the following command:  
+`git clone https://github.com/mazzan/MVC.git`  
+2. Execute the "Common" actions below.
+
+####Download the framework
+An alternative way of installing the framework is to download all the files in a Zip-file from GitHub. 
+1. Open the address `https://github.com/mazzan/MVC.git` in a web browser. This will open the repository for Rama framework on GitHub.
+2. Locate and click the button `Download Zip` in the lower right side of the page.
+3. Choose where to save the Zip-file on your local computer.
+4. Extract the content in the Zip-file to a location of your choice.
+5. execute the "Common" actions below.
+
+####Common actions
+
+1. Locate the folder `site/data` and make sure that write permissions are enabled (chmod 777).
+
+2. Open a web browser and enter the address to point at your installation. The Rama Index Controller page should now be displayed in the browser. If not execute the actions in step 4. If the page is successfully displayed continue to step 5.
+3. On some servers the installation directory has to be pointed out in the file `.htaccess`. If the page isn't displayed when pointed out try changing the "Rewritebase" entry in the .htaccess file :  
+`RewriteBase /~masb13/phpmvc/MVC/`
+4. Some of the modules has to be initiated for the framework to work properly. Locate and click on the link `module/install` at the bottom of the page. The page will automatically create:
+* The database tables
+* A common guestbook
+* A common blog
+* An administrator user account with UserID: root and Password: root
+* * An basic user account with UserID: doe and Password: doe
+---
+
+##Site management
+The look and feel of the page can be modified by altering some file variables or by editing the site CSS settings. It is also possible, as a logged in user, to create or edit the site content. 
+
+###Change the appearance
+To change the appearance of the site modifications has to be done to some files. 
+
+####Page appearance (CSS)
+The CSS (Cascading Style Sheet) file describes the look and formatting of the site. By altering the parameters most of the sites look and feel can be changed. It include settings for colors, measures, fonts and much more. The parent CSS file is located in `themes/grid/style.css`. This file is inherited into the used themes CSS file located in `site/themes/mytheme/style.css`. It is recommended to do all changes in the mytheme CSS file which overrides the settings in the parent CSS file. 
+
+The original content of the file is:  
+
+    ** 
+     * Description: Sample theme for site which extends the Rama grid-theme.
+     */
+    @import url(../../../themes/grid/style.css);
+
+    html{background-color:#FFE2B3;}
+    body{background-color:#D0DCE1;}
+    #outer-wrap-header{background-color:#FFE2B3;border-bottom:2px solid #FFCE80}
+    #outer-wrap-footer{background-color:#FFE2B3}
+    a{color:#436370}
+    #navbar ul.menu li a.selected{background-color:#D0DCE1;border-bottom:none;}
+
+####Header and Footer
+The sites Header and Footer design can be changed to suite the purpose of the site. The following entries can be modified:'
+* The main header text (Rama)
+* The slogan text (A PHP-based MVC-inspired CMF)
+* The favicon picture
+* The logo picture
+* The logo picture size
+* The footer text (Rama by Mats Sandén (mazzan@masoft.se) | Based on CLydia by Mikael Roos (mos@dbwebb.se))
+
+To change the entries open the file `site/config.php` in a text editor and modify the parameters. The part to change is located at lines 173 - 181 in the file:
+
+The original content of the file is:
+
+    'menu_to_region' => array('my-navbar'=>'navbar'),
+    'data' => array(
+    'header' => 'Rama',
+    'slogan' => 'A PHP-based MVC-inspired CMF',
+    'favicon' => 'logo_80x80.png',
+    'logo' => 'logo_80x80.png',
+    'logo_width'  => 80,
+    'logo_height' => 80,
+    'footer' => '<p>Rama by Mats Sandén (mazzan@masoft.se) | Based on CLydia by Mikael Roos (mos@dbwebb.se)</p>',
+
+###Create/ Edit content
+To be allowed to edit or create new content you have to be logged in. When logging in additional links will appear allowing Create and Edit.
+
+####Modify an existing page or blog page.
+1. When logged in open the "Content" page.
+2. Click the `edit` link to the right of the post/ page you want to modify.
+3. Make your changes in the form fields and click the `save` button.
+4. If required the post/ page can be deleted by clicking the `delete` button.
+
+####Create a new page or blog post
+1. When logged in open the "Content" page.
+2. Click the `Create new content` link under the header "Actions" at page bottom.
+3. Fill in the desired information in the form fields. 
+4. To create a page enter "page" as type. To create a blog post enter "post" as type.
+5. If no filter is required enter "plain".
+
+####Add/ modify page links
+The existing links in the header can be modified and new links can be added. This is done by modifying the file `site/config.php`. The menu is defined under "Define menus" and the menu to show is set in the theme settings by the "menu_to_region" parameter. The example below describes how to create a link to a newly added page.
+1. Create a new page as described in the section above.
+2. Open the page "Content"
+3. Locate your newly created page and note the number beginning the content row.
+4. Open the file `site/config.php` in a text editor.
+5. Locate the section "Define menus" and add a new entry at the end of the "'my-navbar'" part. Note that the number fetched in step 3 is the actual url.
+
+Before:
+
+    'my-navbar' => array(
+    'home'      => array('label'=>'About Me', 'url'=>'my'),
+    'blog'      => array('label'=>'My Blog', 'url'=>'my/blog'),
+    'guestbook' => array('label'=>'Guestbook', 'url'=>'my/guestbook'),
+    ),
+    
+After:
+
+    'my-navbar' => array(
+    'home'      => array('label'=>'About Me', 'url'=>'my'),
+    'blog'      => array('label'=>'My Blog', 'url'=>'my/blog'),
+    'guestbook' => array('label'=>'Guestbook', 'url'=>'my/guestbook'),
+    'new page' => array('label'=>'New page', 'url'=>'page/view/9'),
+    ),
+    
+6. The new link is now available in the navigation bar in the page header.
 
-This project is used while teaching advanced PHP-programming with Model View Controller (MVC)
-frameworks with a taste of Content Management Framework (CMF). 
-
-Material in below links are mainly in swedish.
-
-* http://dbwebb.se/lydia/current (try out the code)
-* http://dbwebb.se/f/123 (forum with some tutorials on how the code was built, only in swedish)
-
-
-License
--------
-
-Lydia is licenses according to MIT-license. 
-Any included external modules are subject to their own licensing.
-
-
-Use of external libraries
------------------------------------
-
-Lydia uses external libraries for state of the art samples. Any external module can be replaced or
-removed for less features but without disturbing the Lydia core functionality.
-
-The following external modules are included in Lydia.
-
-### HTMLPurifier
-HTMLPurifier by Edward Z. Yang to filter & format HTML.
-Website: http://htmlpurifier.org/ 
-Version: 4.4.0 (2012-01-18)
-License: LGPL
-Lydia path: `src/CHTMLPurifier`
-Used by: `CMContent`
-
-
-### lessphp
-lessphp by leaf to compile LESS.
-Website: http://leafo.net/lessphp
-Version: 0.3.4-2 (2012-04-17)
-License: Dual license, MIT LICENSE and GPL VERSION 3
-Lydia path: `themes/grid/lessphp`
-Used by: `themes/grid/style.php`
-
-
-### The Semantic Grid System
-by Tyler Tate/TwigKit to get grid layout through LESS.
-Website: http://semantic.gs/
-Version: 1.2 (2012-01-11)
-License: Apache License
-Lydia path: `themes/grid/semantic.gs`
-Used by: `themes/grid/style.less.css`
-
-
-History
--------
-
-Todo.
-
-* Yes, a lot of things to do.
-
-v0.2.17 (2012-04-23)
-
-* Integrated with semantic.gs though the new theme `theme/grid`.
-* Included sematic.gs version 1.2 (2012-01-11).
-
-
-v0.2.16 (2012-04-19)
-
-* Integrated with `lessphp` version 0.3.4-2 (2012-04-17) and LESS though a new theme, `theme/grid`.
-
-
-v0.2.15 (2012-04-16)
-
-* Added filter to format `CMContent` as 'htmlpurify' using http://htmlpurifier.org/.
-* Added external library `htmlpurifier-4.4.0-standalone` in wrapper `CHTMLPurifier`.
-* Added LICENSE.txt as MIT-license.
-
-
-v0.2.14 (2012-04-16)
-
-* Added filter to format `MCContent` as 'bbcode'.
-* Added function `bbcode2html()` in `src/bootstrap.php`.
-
-
-v0.2.13 (2012-04-13)
-
-* Added filter to format `CMContet` as 'plain', 'html' and 'php'. 'html' and 'php' is disabled in `CMContent` as default. 
-* Added function `makeClickable()` in `src/bootstrap.php` which formats links in text to <a>.
-
-
-v0.2.12 (2012-04-13)
-
-* Added `CCBlog` to display all content of type 'post' in a blog-like list.
-* Added `CCPage` to display content of type 'page' in a singel-page view.
-* Added formatting of DateTime since using function `formatDateTimeDiff()` and theme helper `time_diff()`.
-* Lydia always set timezone to UTC. All time values stored in database is in UTC. 
-
-
-v0.2.11 (2012-04-11) 
-
-* Added handling for content with `CMContent` and `CCContent`.
-
-
-v0.2.10 (2012-03-29) 
-
-* Created a sequence to create a new user `user/create` using the web as userinterface.
-* Corrected: CreateUrl in CCobject did not return its result.
-
-
-v0.2.09 (2012-03-28) 
-
-* Added server-side form validation to `CForm`.
-
-
-v0.2.08 (2012-03-28) 
-
-* Changed name of database class from `CMDatabase` to `CDatabase`.
-* Added hashing techniques for storing password. plain, md5, sha1, md5salt, sha1salt.
-* Made sha1salt the default algorithm when storing passwords.
-
-
-v0.2.07 (2012-03-27) 
-
-* Integrated with gravatar.com and created theme function to get the gravatar link.
-
-
-v0.2.06 (2012-03-25) 
-
-* Added classes for CForm, `CFormElement`, `CFormElementText`, `CFormElementPassword`, `CFormElementSubmit`
-* Made `CForm` use `CFormElement` and both implements ArrayAccess.
-* User can save profile on user/profile.
-* `CMUser` uses implements ArrayAccess.
-
-
-v0.2.05 (2012-03-21) 
-
-* Corrected: Handling of incoming urls based on ?q=controller/metod and index.php/controller/metod.
-* Added utility class CForm for form handling.
-* Added login-form on user/login.
-
-
-v0.2.04 (2012-03-19) 
-
-* Used Reflection API to show the available controllers and methods using the index controller.
-
-
-v0.2.03 (2012-03-19) 
-
-* Made `CMUser` a part of `CLydia` and `CObject`.
-* Created theme function `login_menu()`.
-* Created controller `CCUserControlPanel`.
-
-
-v0.2.02 (2012-03-15) 
-
-* Uppgraded `CMUser` with groups and group-membership for each user.
-
-
-v0.2.01 (2012-03-15) 
-
-* Added `CMUser` and `CCUser` to handle users. Created code for testing login and logout of user.
-* Added inteface convenience methods `RedirectToController` and `RedirectToControllerMethod` in `CObject`.
-
-
-v0.1.9 (2012-03-13) 
-
-* Added `CMGuestbook` as a model for the sample guestbook application.
-* Rewrote code and separated between guestbook controller and model.
-
-
-v0.1.8 (2012-03-05) 
-
-* Added `CSession` as a wrapper to `$_SESSION`.
-* Enabled flashmemory in `CSession` for as a memory to live through pagerequests, useful to send 
-feedback to users and showing debuginfo to the developer.
-* Updated `Guestbook` to make use of the new features.
-
-
-v0.1.7 (2012-02-24) 
-
-* Added a container for the views `CViewContainer`.
-* Integrated `CViewContainer` in `CCGuestbook`, `CLydia`, `CObject`, and the theme handling.
-* This makes `$ly->data` obsolete and to be removed in coming releases.
-
-
-v0.1.6 (2012-02-24) 
-
-* Added interface to those classes that uses SQL, `IUseSQL`.
-* Updated `CCGuestbook` to use `IUseSQL`.
-
-
-v0.1.5 (2012-02-24) 
-
-* Introduced the database layer as `CMDatabase`.
-* Showed how to use it in the `CCGuestbook` controller example.
-* Enabled debug output from the database operations using settings in config-file and theme-helper 
-`get_debug()`.
-* Created a default exception handler in `bootstrap.php`.
-* `CLydia` creates and owns the databaseobject as `$ly->db`.
-* `CObject` makes the database object available for subclasses through `$this->db`.
-
-
-v0.1.4 (2012-02-23) 
-
-* Improved guestbook example to store messages in database using PHP PDO and SQLite.
-* Added konfigurationsitem fpr database in site/config.php.
-* Added site/data directory which should be writable bu the webserver.
-
-
-v0.1.3 (2012-02-15) 
-
-* Added some style and an icon the the core theme.
-* Added a guestbook application as an example of a controller using database and forms.
-* The guestbook is fully working and stores entries in the session.
-* Cope with querystring sent to controller and methods.
-* Added theme helper theme_url($url) which prepends $url with the url to the theme directory.
-* Added session_start() in CLydia.
-* Use default timezone as defined in site/config.php, set in CLydia::__construct()
-
-
-v0.1.2 (2012-02-15) 
-
-* One common baseclass for controllers and modules, CObject, holds access to CLydia through $this->
-* Output from theme helper get_debug() is configurable in site/config.php.
-* Wrapper htmlent() for htmlentities() to support character encoding from site/config.php.
-* Remove all - and _ from the url before checking if method exists. Enables developer/display-object 
-and developer/display_object to point to developer/displayobject.
-
-
-v0.1.1 (2012-02-14) 
-v0.1.0 (2012-02-14) 
-
-* All requests handled by `index.php` and using mod_rewrite in `.htaccess`. 
-* A base structure with `bootstrap.php`, frontcontroller and theme engine.
-* Frontcontroller `CLydia::FronControllerRoute()` supporting varius url-constructs.
-* A basic theme controller, `CLydia::ThemeEngineRender()`, with `functions.php`, `style.css` and template files.
-* Managing base_url and introducing theme helper functions.
-* 'CRequest' manages creation of internal links.
-
-v0.01 - v0.03 (2011 december)
-* This was the first release used in a course called dbwebb2.
-
-
- .   
-..:  Copyright 2011 by Mikael Roos (me@mikaelroos.se)
